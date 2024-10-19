@@ -10,7 +10,6 @@ const Map = () => {
 
     useEffect(() => {
         if (!userLocation) {
-            // Solo se pedirá la ubicación una vez
             navigator.geolocation.getCurrentPosition((position) => {
                 setUserLocation({
                     latitude: position.coords.latitude,
@@ -18,13 +17,13 @@ const Map = () => {
                 });
             });
         } else {
-            // Solo inicializa el mapa si ya tenemos la ubicación del usuario
             mapboxgl.accessToken = import.meta.env.VITE_MAP_KEY as string;
             if (mapContainerRef.current && !mapRef.current) {
                 mapRef.current = new mapboxgl.Map({
                     container: mapContainerRef.current,
                     center: [userLocation.longitude, userLocation.latitude],
                     projection: 'globe',
+                    zoom: 2,
                 });
 
                 // Controles del mapa
@@ -34,19 +33,18 @@ const Map = () => {
                         mapboxgl: mapboxgl as any,
                     })
                 );
-                mapRef.current.addControl(
-                    new mapboxgl.GeolocateControl({
-                        positionOptions: {
-                            enableHighAccuracy: true,
-                        },
-                        trackUserLocation: true,
-                        showUserHeading: true,
-                        fitBoundsOptions: {
-                            pitch: 20,
-                            animate: true,
-                        },
-                    })
-                );
+                mapRef.current.addControl(new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true,
+                    },
+                    trackUserLocation: true,
+                    showUserHeading: true,
+                    fitBoundsOptions: {
+                        pitch: 20,
+                        zoom: 17,
+                    },
+                }));
+
                 mapRef.current.addControl(new mapboxgl.FullscreenControl());
                 mapRef.current.addControl(new mapboxgl.NavigationControl());
             }
