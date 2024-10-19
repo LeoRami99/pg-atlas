@@ -1,5 +1,5 @@
 const Navbar = () => {
-    return (<div className="navbar md:w-3/4 w-full top-0 md:mt-5 fixed z-10 backdrop-blur bg-white/50 shadow-xl rounded-badge">
+    return (<div className="navbar md:w-3/4 w-full top-0 md:mt-5 fixed z-10 backdrop-blur bg-white/50 shadow-xl rounded-badge transition-all duration-300">
         <div className="flex-1">
             <img src="/logoPgAtlas.png" alt="Logo PGAtlas" className="w-16" />
             <a className="text-xl font-bold">PGAtlas</a>
