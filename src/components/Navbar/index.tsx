@@ -1,7 +1,8 @@
 const Navbar = () => {
-    return (<div className="navbar bg-base-100">
+    return (<div className="navbar top-0 fixed z-10 backdrop-blur bg-white/50">
         <div className="flex-1">
-            <a className="btn btn-ghost text-xl">PG-Atlas</a>
+            <img src="/logoPgAtlas.png" alt="Logo PGAtlas" className="w-16" />
+            <a className="text-xl">PGAtlas</a>
         </div>
         <div className="flex-none">
             <button className="btn btn-primary">
