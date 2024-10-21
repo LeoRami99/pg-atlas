@@ -1,13 +1,13 @@
+import { TonConnectButton } from "@tonconnect/ui-react";
+
 const Navbar = () => {
-    return (<div className="navbar md:w-3/4 w-full top-0 md:mt-5 fixed z-10 backdrop-blur bg-white/50 shadow-xl rounded-badge transition-all duration-300">
+    return (<div className="navbar md:w-3/4 w-full top-0 md:mt-5 fixed z-10 backdrop-blur bg-white/50 shadow-xl rounded-badge transition-[width] duration-300">
         <div className="flex-1">
             <img src="/logoPgAtlas.png" alt="Logo PGAtlas" className="w-16" />
             <a className="text-xl font-bold">PGAtlas</a>
         </div>
         <div className="flex-none">
-            <button className="btn btn-primary rounded-badge text-white font-bold">
-                Conectar wallet
-            </button>
+            <TonConnectButton />
             {/* <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                     <div className="indicator">

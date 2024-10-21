@@ -47,6 +47,10 @@ const Map = () => {
 
                 mapRef.current.addControl(new mapboxgl.FullscreenControl());
                 mapRef.current.addControl(new mapboxgl.NavigationControl());
+
+
+
+
             }
         }
 
