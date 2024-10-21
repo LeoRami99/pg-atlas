@@ -6,7 +6,7 @@ type TonProviderProps = {
 
 const TonProvider = ({ children }: TonProviderProps) => {
     return (
-        <TonConnectUIProvider manifestUrl='manifest.json'>
+        <TonConnectUIProvider manifestUrl='https://rapid-limit-5419.on.fleek.co/manifest.json'>
             {children}
         </TonConnectUIProvider>
     )
