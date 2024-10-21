@@ -9,7 +9,6 @@ function App() {
   return (
     <>
       <div className='flex justify-center'>
-
         <Navbar />
       </div>
       <Map />
