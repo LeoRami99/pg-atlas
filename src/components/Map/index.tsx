@@ -54,13 +54,13 @@ const Map = () => {
                     const marker = new mapboxgl.Marker()
                         .setLngLat([project.longitude, project.latitude])
                         .addTo(mapRef.current as mapboxgl.Map);
-                    // hacer zoom al hacer clic en el marcador
                     marker.getElement().addEventListener('click', () => {
                         mapRef.current?.flyTo({
                             center: [project.longitude, project.latitude],
-                            zoom: 15,
+                            zoom: 10,
                         });
                     });
+
 
                     // Configura el evento de clic para abrir el modal
                     marker.getElement().addEventListener('click', () => {
