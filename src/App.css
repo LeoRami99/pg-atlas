@@ -16,9 +16,9 @@
 }
 
 .mapboxgl-ctrl-top-right{
-    margin-top: 70px;
+    margin-top: 100px;
 }
 .mapboxgl-ctrl-top-right  input {
    /* aplicar estilos de tailwind */
-    @apply  w-full;
+    @apply  md:w-[full] w-[full]  bg-white border border-gray-300 rounded-lg shadow-sm py-2 px-4 block appearance-none leading-normal;
 }
