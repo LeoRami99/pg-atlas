@@ -62,16 +62,58 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 center: [userLocation.longitude, userLocation.latitude],
                 projection: 'globe',
                 zoom: 2,
+                tessellationStep: 1,
+            });
+            mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
+            mapRef.current.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true, showUserLocation: true }));
+            mapRef.current.addControl(new mapboxgl.NavigationControl());
+            mapRef.current.addControl(new mapboxgl.FullscreenControl());
+            mapRef.current.addControl(new mapboxgl.ScaleControl());;
+
+            const secondsPerRevolution = 240;
+
+            const maxSpinZoom = 5;
+
+            const slowSpinZoom = 3;
+
+            let userInteracting = false;
+            const spinEnabled = true;
+
+            function spinGlobe() {
+                const zoom = mapRef.current?.getZoom() ?? 0;
+                if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+                    let distancePerSecond = 360 / secondsPerRevolution;
+                    if (zoom > slowSpinZoom) {
+
+                        const zoomDif =
+                            (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+                        distancePerSecond *= zoomDif;
+                    }
+                    const center = mapRef.current?.getCenter();
+                    if (!center) return;
+                    center.lng -= distancePerSecond;
+                    mapRef.current?.easeTo({ center, duration: 1000, easing: (n) => n });
+                }
+            }
+
+
+            mapRef.current?.on('mousedown', () => {
+                userInteracting = true;
+            });
+            mapRef.current?.on('dragstart', () => {
+                userInteracting = true;
+            });
+            mapRef.current?.on('moveend', () => {
+                spinGlobe();
             });
 
-            mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
-            mapRef.current.addControl(new mapboxgl.GeolocateControl());
-            mapRef.current.addControl(new mapboxgl.NavigationControl());
+            spinGlobe();
             createMarkers();
         }
     }, [userLocation, createMarkers]);
 
     useEffect(() => {
+
         createMarkers();
     }, [projects, createMarkers]);
 
