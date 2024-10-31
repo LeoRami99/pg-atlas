@@ -19,17 +19,36 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
 
     const createMarkers = useCallback(() => {
         if (mapRef.current) {
-            // Remove existing markers to prevent duplicates
             markersRef.current.forEach((marker) => marker.remove());
             markersRef.current = [];
 
             projects.forEach((project) => {
-                const marker = new mapboxgl.Marker({
-                    color: '#FF0000',
-                })
+                const el: HTMLDivElement = document.createElement('div');
+                el.className = 'marker';
+                el.style.backgroundImage = `url('/marker.png')`;
+                el.style.width = '50px';
+                el.style.height = '50px';
+                el.style.cursor = 'pointer';
+                el.style.backgroundSize = 'cover';
+
+
+                const marker = new mapboxgl.Marker(
+                    el
+                )
                     .setLngLat([project.longitude, project.latitude])
                     .addTo(mapRef.current as mapboxgl.Map);
-                marker.getElement().addEventListener('click', () => onSelectProject(project));
+
+
+                el.addEventListener('click', () => {
+                    mapRef.current?.flyTo({
+                        center: [project.longitude, project.latitude],
+                        zoom: 10,
+                        essential: true
+                    });
+
+                    onSelectProject(project);
+                });
+
                 markersRef.current.push(marker);
             });
         }
@@ -48,42 +67,13 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
             mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
             mapRef.current.addControl(new mapboxgl.GeolocateControl());
             mapRef.current.addControl(new mapboxgl.NavigationControl());
-
-            // Create markers after map is initialized
             createMarkers();
         }
     }, [userLocation, createMarkers]);
 
     useEffect(() => {
-        // Update markers when projects change
         createMarkers();
     }, [projects, createMarkers]);
-
-    useEffect(() => {
-        if (mapRef.current) {
-            const handleMoveEnd = () => {
-                if (mapRef.current) {
-                    const bounds = mapRef.current.getBounds();
-                    markersRef.current.forEach((marker, index) => {
-                        const project = projects[index];
-                        if (bounds?.contains([project.longitude, project.latitude])) {
-                            marker.getElement().style.display = 'block';
-                        } else {
-                            marker.getElement().style.display = 'none';
-                        }
-                    });
-                }
-            };
-
-            mapRef.current.on('moveend', handleMoveEnd);
-
-            return () => {
-                if (mapRef.current) {
-                    mapRef.current.off('moveend', handleMoveEnd);
-                }
-            };
-        }
-    }, [projects]);
 
     return <div ref={mapContainerRef} style={{ width: '100%', height: '100vh' }} />;
 };
