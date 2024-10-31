@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import MapComponent from '../MapComponent';
 import FiltersComponent from '../FiltersComponent';
-import DataGoods from '../../DataGoodsUbi.json';
 import { Project } from '../../models/projects.models';
 import { getProjectsFilters } from '../../services/projects.service';
 import { Filters } from '../../types/filters.type';
