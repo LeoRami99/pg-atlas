@@ -3,9 +3,23 @@ import axiosInstance from "./config";
 import { Filters } from "../types/filters.type";
 
 export const getProjectsFilters = async (filters: Filters) => {
-
     try {
-        const response = await axiosInstance.get(`/project/filters?blockchain=${filters.blockchain}&activityStatus=${filters.activityStatus}&country=${filters.country}&city=${filters.city}`);
+
+        const validFilters = Object.entries(filters)
+            .filter(([_, value]) => value)
+            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+
+        if (Object.keys(validFilters).length === 0) {
+            return await axiosInstance.get(`/project/filter`);
+
+        }
+
+
+        const response = await axiosInstance.get(`/project/filter`, {
+            params: validFilters,
+        });
+
         return response;
     } catch (error) {
         throw error;
