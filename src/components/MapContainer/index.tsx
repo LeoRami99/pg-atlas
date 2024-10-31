@@ -46,13 +46,17 @@ const MapContainer = () => {
 
                 </>
             ) : (
-                <div className='flex justify-center items-center h-screen flex-col'>
-                    <h1 className='text-2xl text-center'>
-                        Cargando ubicación... <br />
-                        Por favor, acepta la solicitud de ubicación
+                <div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-green-200 to-green-600 text-white'>
+                    <img src='/logoPgAtlas.png' alt='PGAtlas Logo' className='w-64 mb-8' />
+                    <h1 className='text-3xl font-bold text-center mb-4'>
+                        Loading your location... <br />
+                        Please accept the location request.
                     </h1>
-                    <img src="/logoPgAtlas.png" alt="Logo PGAtlas" className="w-96" />
+                    <p className='text-lg text-center max-w-md'>
+                        We need your permission to access your location in order to provide the best experience possible. Thank you for your patience!
+                    </p>
                 </div>
+
             )}
         </div>
     );
