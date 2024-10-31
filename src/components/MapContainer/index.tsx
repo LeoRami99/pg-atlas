@@ -38,7 +38,12 @@ const MapContainer = () => {
                         projects={filteredProjects}
                         onSelectProject={setSelectedProject}
                     />
-                    {/* {selectedProject && <ProjectModal project={selectedProject} />} */}
+                    {selectedProject && (
+                        <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center">
+                            {/* <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} /> */}
+                        </div>
+                    )}
+
                 </>
             ) : (
                 <div className='flex justify-center items-center h-screen flex-col'>
