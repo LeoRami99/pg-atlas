@@ -1,7 +1,8 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { Project } from '../../models/projects.models';
+import useCoordinates from '../../hooks/useCoordinates';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css';
@@ -16,6 +17,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
     const mapRef = useRef<mapboxgl.Map | null>(null);
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const markersRef = useRef<mapboxgl.Marker[]>([]);
+    const setCoordinates = useCoordinates().setCoordinates;
 
     const createMarkers = useCallback(() => {
         if (mapRef.current) {
@@ -31,14 +33,13 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 el.style.borderRadius = '50%';
                 el.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
 
-                const marker = new mapboxgl.Marker(
-                    el
-                )
+                const marker = new mapboxgl.Marker(el)
                     .setLngLat([project.longitude, project.latitude])
                     .addTo(mapRef.current as mapboxgl.Map);
 
 
-                el.addEventListener('click', () => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     if (mapRef.current) {
                         mapRef.current.flyTo({
                             center: [project.longitude, project.latitude],
@@ -70,7 +71,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 center: [userLocation.longitude, userLocation.latitude],
                 projection: 'globe',
                 zoom: 4,
-                tessellationStep: 1,
+                tessellationStep: 2,
+                touchPitch: true,
             });
             mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
             mapRef.current.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true, showUserLocation: true }));
@@ -103,7 +105,27 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                     mapRef.current?.easeTo({ center, duration: 1000, easing: (n) => n });
                 }
             }
+            mapRef.current.on('click', (e) => {
+                if (!mapRef.current) return;
 
+                // Verifica si el clic fue en un marcador
+                const features = mapRef.current.queryRenderedFeatures(e.point, {
+                    layers: [''] // Debes usar el id de la capa de tus marcadores si los has agregado a través de una fuente
+                });
+
+                if (features.length) {
+                    // Si hay características en el punto del clic, significa que el clic fue en un marcador.
+                    console.log('Clicked on a marker');
+                    return;
+                }
+
+                // Si no se hizo clic en un marcador, procede a capturar las coordenadas y mostrar el modal del proyecto
+                const { lng, lat } = e.lngLat;
+
+                const modal = document.getElementById('modal-register-project') as HTMLDialogElement;
+                modal?.showModal();
+                setCoordinates(lat, lng);
+            });
 
             mapRef.current?.on('mousedown', () => {
                 userInteracting = true;
@@ -121,7 +143,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
     }, [userLocation, createMarkers]);
 
     useEffect(() => {
-
         createMarkers();
     }, [projects, createMarkers]);
 
