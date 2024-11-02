@@ -20,4 +20,14 @@ export interface Project {
     source: string;
     latitude: number;
     longitude: number;
+    donations: donationType[];
+}
+
+
+export type donationType = {
+    donatorAddress: string;
+    amount: number;
+    attentionId: string;
+    date: string;
+    txHash: string;
 }
