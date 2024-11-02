@@ -2,7 +2,7 @@ export interface Project {
     projectName: string;
     organizationType: string;
     date: string;
-    city: string;
+    city?: string;
     country: string;
     region: string;
     description: string;
@@ -20,6 +20,8 @@ export interface Project {
     source: string;
     latitude: number;
     longitude: number;
+    wallet: string;
+    attestationId?: string;
     donations: donationType[];
 }
 

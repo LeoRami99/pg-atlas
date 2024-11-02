@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Modal from "../Modal";
 import sdgOptions from "../../data/sdg.json";
 import { FaEarthAmericas } from "react-icons/fa6";
 import useCoordinates from "../../hooks/useCoordinates";
+import { IoIosCloseCircle } from "react-icons/io";
+import { getCountries } from "../../services/countrystatecity.service";
 
 const FormRegisterProject = () => {
+    const [countries, setCountries] = useState([] as any);
+    useEffect(() => {
+        getCountries().then((data) => {
+            console.log(data)
+            setCountries(data);
+        });
+    }, []);
+
+
+
+
+
     const latitude = useCoordinates().latitude;
     const longitude = useCoordinates().longitude;
     // Estado para almacenar los valores del formulario
@@ -86,7 +100,7 @@ const FormRegisterProject = () => {
 
     return (
         <Modal id="modal-register-project">
-            <button onClick={closeModal}>Close</button>
+            <button onClick={closeModal} className="absolute top-0 right-0 text-2xl mt-4"><IoIosCloseCircle /></button>
             <h2 className="text-2xl font-bold text-center">Register Project</h2>
 
             <form onSubmit={handleRegisterProject} className="flex flex-col gap-4 p-4">
