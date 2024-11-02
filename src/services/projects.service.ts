@@ -11,12 +11,12 @@ export const getProjectsFilters = async (filters: Filters) => {
 
 
         if (Object.keys(validFilters).length === 0) {
-            return await axiosInstance.get(`/project/filter`);
+            return await axiosInstance.get(`/projects/filter`);
 
         }
 
 
-        const response = await axiosInstance.get(`/project/filter`, {
+        const response = await axiosInstance.get(`/projects/filter`, {
             params: validFilters,
         });
 
@@ -29,7 +29,7 @@ export const getProjectsFilters = async (filters: Filters) => {
 
 export const getListBlockchain = async () => {
     try {
-        const response = await axiosInstance.get("/project/blockchains");
+        const response = await axiosInstance.get("/projects/blockchains");
         return response.data;
     } catch (error) {
         throw error;

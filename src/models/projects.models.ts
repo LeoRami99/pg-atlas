@@ -7,13 +7,15 @@ export interface Project {
     region: string;
     description: string;
     website: string;
-    energyCategory: string;
+    energyCategory: {
+        name: string;
+        color: string;
+    };
     subCategory: string;
     blockchain: string;
     blockchainImages: string[];
     activityStatus: string;
-    sdgGoal7: string;
-    sdgGoal13: string;
+    [key: `sdgGoal${number}`]: string;
     bfgid: string;
     source: string;
     latitude: number;

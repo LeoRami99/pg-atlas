@@ -1,0 +1,87 @@
+[
+	{
+		"name": "sdgGoal1",
+		"title": "No Poverty",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-01-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal2",
+		"title": "Zero Hunger",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-02-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal3",
+		"title": "Good Health and Well-being",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-04-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal4",
+		"title": "Quality Education",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-04-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal5",
+		"title": "Gender Equality",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-05-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal6",
+		"title": "Clean Water and Sanitation",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-06-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal7",
+		"title": "Affordable and Clean Energy",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-07-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal8",
+		"title": "Decent Work and Economic Growth",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-08-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal9",
+		"title": "Industry, Innovation and Infrastructure",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-09-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal10",
+		"title": "Reduced Inequality",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-10-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal11",
+		"title": "Sustainable Cities and Communities",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-11-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal12",
+		"title": "Responsible Consumption and Production",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-12-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal13",
+		"title": "Climate Action",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-13-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal14",
+		"title": "Life Below Water",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-14-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal15",
+		"title": "Life on Land",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-15-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal116",
+		"title": "Peace, Justice and Strong Institutions",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-16-1024x1024.png"
+	},
+	{
+		"name": "sdgGoal17",
+		"title": "Partnerships for the Goals",
+		"url_image": "https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-17-1024x1024.png"
+	}
+]

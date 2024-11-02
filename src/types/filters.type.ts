@@ -1,6 +1,9 @@
 export type Filters = {
-    blockchain?: string;
     activityStatus?: string;
+    category?: string;
+    blockchain?: string;
+    organizationType?: string;
     country?: string;
-    city?: string;
+    region?: string;
+    date?: string;
 };
