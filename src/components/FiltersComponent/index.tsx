@@ -86,9 +86,17 @@ const FiltersComponent: React.FC<FiltersComponentProps> = ({ applyFilters }) => 
                                 : 'All'}
                         </span>
                     </h2>
-                    <input type="text" className="input input-sm rounded-badge shadow-md" name="city" placeholder="City" onChange={handleInputChange} />
+                    <select data-filter="region" className='select select-sm rounded-badge shadow-md' name="region" onChange={(e) => setFilters({ ...filters, region: e.target.value })}><option value="">All</option><option value="Africa">Africa</option><option value="Asia">Asia</option><option value="Europe">Europe</option><option value="Middle East">Middle East</option><option value="North America">North America</option><option value="Oceania">Oceania</option><option value="South America">South America</option></select>
                     <input type="text" className="input input-sm rounded-badge shadow-md" name="country" placeholder="Country" onChange={handleInputChange} />
                     <input type="text" className="input input-sm rounded-badge shadow-md" name="activityStatus" placeholder="Status" onChange={handleInputChange} />
+                    <select data-filter="organization-type" className='select select-sm rounded-badge shadow-md' name="organizationType" onChange={
+                        (e) => setFilters({ ...filters, organizationType: e.target.value })
+                    }><option value="">Organization Type</option><option value="Corporate">Corporate</option><option value="DAO">DAO</option><option value="decentralized App">decentralized App</option><option value="Decentralized App">Decentralized App</option><option value="Foundation">Foundation</option><option value="Government">Government</option><option value="Non-profit">Non-profit</option><option value="Open-source">Open-source</option><option value="Other">Other</option><option value="Partnership">Partnership</option><option value="Private-Public Partnership">Private-Public Partnership</option><option value="Start-up">Start-up</option></select>
+                    <select className='select select-sm rounded-badge shadow-md' data-filter="category" onChange={(e) => {
+                        setFilters({ ...filters, category: e.target.value });
+                    }}><option value="">
+                            Category
+                        </option><option value="Agriculture &amp; Food">Agriculture &amp; Food</option><option value="Aid &amp; Philanthropy">Aid &amp; Philanthropy</option><option value="Climate &amp; Environment">Climate &amp; Environment</option><option value="Digital content &amp; Arts">Digital content &amp; Arts</option><option value="Education &amp; Employment">Education &amp; Employment</option><option value="Energy">Energy</option><option value="Finance &amp; Insurance">Finance &amp; Insurance</option><option value="Government &amp; Democracy">Government &amp; Democracy</option><option value="Health">Health</option><option value="Identity &amp; Ownership">Identity &amp; Ownership</option><option value="Internet &amp; Telco">Internet &amp; Telco</option><option value="Logistics &amp; Traceability">Logistics &amp; Traceability</option><option value="Products &amp; Consumption">Products &amp; Consumption</option><option value="Transport &amp; Infrastructure">Transport &amp; Infrastructure</option></select>
                     <label>
                         <input
                             list="blockchain-list"
@@ -103,6 +111,7 @@ const FiltersComponent: React.FC<FiltersComponentProps> = ({ applyFilters }) => 
                             <option key={blockchain} value={blockchain} />
                         ))}
                     </datalist>
+                    <input type="number" className="input input-sm rounded-badge shadow-md" name="date" placeholder="Date" onChange={handleInputChange} />
 
                     <button className="btn btn-sm mt-2 btn-primary rounded-badge text-white" onClick={handleApplyFilters}>Apply Filters</button>
                 </div>

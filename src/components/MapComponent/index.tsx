@@ -21,16 +21,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
         if (mapRef.current) {
             markersRef.current.forEach((marker) => marker.remove());
             markersRef.current = [];
-
             projects.forEach((project) => {
                 const el: HTMLDivElement = document.createElement('div');
                 el.className = 'marker';
-                el.style.backgroundImage = `url('/marker.png')`;
-                el.style.width = '50px';
-                el.style.height = '50px';
+                el.style.backgroundColor = `${project.energyCategory.color}`;
+                el.style.width = '15px';
+                el.style.height = '15px';
                 el.style.cursor = 'pointer';
-                el.style.backgroundSize = 'cover';
-
+                el.style.borderRadius = '50%';
+                el.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
 
                 const marker = new mapboxgl.Marker(
                     el
@@ -40,20 +39,29 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
 
 
                 el.addEventListener('click', () => {
-                    mapRef.current?.flyTo({
-                        center: [project.longitude, project.latitude],
-                        zoom: 10,
-                        essential: true
-                    });
+                    if (mapRef.current) {
+                        mapRef.current.flyTo({
+                            center: [project.longitude, project.latitude],
+                            zoom: 10,
+                            pitch: 45,
+                            essential: true
+                        });
+                        const onMoveEnd = () => {
+                            onSelectProject(project);
+                            if (mapRef.current) {
+                                mapRef.current.off('moveend', onMoveEnd);
 
-                    onSelectProject(project);
+                            }
+                        };
+                        mapRef.current.on('moveend', onMoveEnd);
+                    }
                 });
+
 
                 markersRef.current.push(marker);
             });
         }
     }, [projects, onSelectProject]);
-
     useEffect(() => {
         if (userLocation && mapContainerRef.current && !mapRef.current) {
             mapboxgl.accessToken = import.meta.env.VITE_MAP_KEY as string;
@@ -61,7 +69,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 container: mapContainerRef.current,
                 center: [userLocation.longitude, userLocation.latitude],
                 projection: 'globe',
-                zoom: 2,
+                zoom: 4,
                 tessellationStep: 1,
             });
             mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
