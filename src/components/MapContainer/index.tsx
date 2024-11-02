@@ -15,7 +15,11 @@ const MapContainer = () => {
         blockchain: '',
         activityStatus: '',
         country: '',
-        city: '',
+        region: '',
+        category: '',
+        organizationType: '',
+        date: '',
+
     };
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
