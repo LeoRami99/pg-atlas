@@ -35,7 +35,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     {project.projectName}
                 </h2>
                 <p className="text-lg text-gray-600">{project.description}</p>
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <p><strong>Organization Type:</strong> {project.organizationType}</p>
                     <p><strong>Date:</strong> {project.date}</p>
                     <p><strong>City:</strong> {project.city}</p>
@@ -48,7 +48,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     <p><strong>Latitude:</strong> {project.latitude}</p>
                     <p><strong>Longitude:</strong> {project.longitude}</p>
 
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                         <h3 className="text-xl font-bold text-center">Sustainable Development Goals</h3>
                         <div className="flex flex-wrap justify-center gap-4 mt-4">
                             {availableSdgs.map(sdg => (
