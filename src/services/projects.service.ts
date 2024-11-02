@@ -4,7 +4,6 @@ import { Filters } from "../types/filters.type";
 
 export const getProjectsFilters = async (filters: Filters) => {
     try {
-
         const validFilters = Object.entries(filters)
             .filter(([_, value]) => value)
             .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
@@ -19,10 +18,12 @@ export const getProjectsFilters = async (filters: Filters) => {
         const response = await axiosInstance.get(`/projects/filter`, {
             params: validFilters,
         });
+        console.log(response);
 
         return response;
     } catch (error) {
-        throw error;
+        console.error(error);
+        return [];
     }
 };
 
@@ -32,6 +33,7 @@ export const getListBlockchain = async () => {
         const response = await axiosInstance.get("/projects/blockchains");
         return response.data;
     } catch (error) {
-        throw error;
+        console.error(error);
+        return [];
     }
 };
