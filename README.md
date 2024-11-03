@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# PGAtlas (Public Good Atlas)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Funding the Commons & Earth Commons Hackathon
 
-Currently, two official plugins are available:
+### Fleek deploy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+xxx
 
-## Expanding the ESLint configuration
+### Telegram Mini app:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+https://t.me/pg_atlas_bot/pg_atlas_app
 
-- Configure the top-level `parserOptions` property like this:
+### PGAtlas - backend:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+https://github.com/medinabrayan/pg-atlas-back
+
+### PGAtlas - API:
+
+#### PGAtlas - API web:
+
+https://pg-atlas-back-production.up.railway.app/api
+
+#### PGAtlas - API IPFS (Filecoin):
+
+https://gateway.lighthouse.storage/ipfs/bafkreihlqi2clorrsoaqv4nhi2kolehsyu6zsnvud5jkehqihuota55kum
+
+### PGAtlas - Attestation schema:
+
+https://testnet-scan.sign.global/schema/onchain_evm_44787_0x27
+
+## Quick start 🏄
+
+Prerequisites: [Node (v20 LTS)](https://nodejs.org/en/download/) and [Git](https://git-scm.com/downloads)
+
+> Clone the repository:
+
+```
+git clone https://github.com/LeoRami99/pg-atlas.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+> Install dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+bun
+```
+
+> Run the project:
+
+```
+bun run dev
+```
+
+## Authors 🏗
+
+[LeroRami99](https://github.com/LeoRami99)
+
+[medinabrayan](https://github.com/medinabrayan)
+
+[salviega](https://github.com/salviega)
