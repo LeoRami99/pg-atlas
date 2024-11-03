@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Modal from "../Modal";
 import sdgOptions from "../../data/sdg.json";
 import { FaEarthAmericas } from "react-icons/fa6";
 import useCoordinates from "../../hooks/useCoordinates";
+import { IoIosCloseCircle } from "react-icons/io";
+import { getCountries } from "../../services/countrystatecity.service";
+import { ethSignService } from "../../services/ethsign";
+import { countryType } from "../../types/countriescitys.type";
 
 const FormRegisterProject = () => {
+    const [countries, setCountries] = useState<countryType[]>([] as countryType[]);
+    const { attestProject } = ethSignService();
+    useEffect(() => {
+        getCountries().then((data) => {
+            setCountries(data);
+        });
+    }, []);
+
     const latitude = useCoordinates().latitude;
     const longitude = useCoordinates().longitude;
     // Estado para almacenar los valores del formulario
@@ -13,7 +25,6 @@ const FormRegisterProject = () => {
         projectName: "",
         organizationType: "",
         date: "",
-        city: "",
         country: "",
         region: "",
         description: "",
@@ -54,29 +65,7 @@ const FormRegisterProject = () => {
     const handleRegisterProject = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // Muestra el resultado estructurado
-        console.log("Project Data:", formData);
-
-        // Reinicia el formulario
-        // setFormData({
-        //     projectName: '',
-        //     organizationType: '',
-        //     date: '',
-        //     city: '',
-        //     country: '',
-        //     region: '',
-        //     description: '',
-        //     website: '',
-        //     energyCategory: '',
-        //     subCategory: '',
-        //     blockchain: '',
-        //     blockchainImages: [],
-        //     activityStatus: '',
-        //     bfgid: '',
-        //     source: '',
-        //     latitude: '',
-        //     longitude: ''
-        // });
+        attestProject(formData);
     };
 
     const closeModal = () => {
@@ -86,9 +75,8 @@ const FormRegisterProject = () => {
 
     return (
         <Modal id="modal-register-project">
-            <button onClick={closeModal}>Close</button>
+            <button onClick={closeModal} className="absolute top-0 right-0 text-2xl mt-4"><IoIosCloseCircle /></button>
             <h2 className="text-2xl font-bold text-center">Register Project</h2>
-
             <form onSubmit={handleRegisterProject} className="flex flex-col gap-4 p-4">
                 <label htmlFor="projectName">Name</label>
                 <input type="text" id="projectName" name="projectName" value={formData.projectName} onChange={handleChange} className="input input-bordered" required />
@@ -113,11 +101,16 @@ const FormRegisterProject = () => {
                 <label htmlFor="date">Date</label>
                 <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} className="input input-bordered" />
 
-                <label htmlFor="city">City</label>
-                <input type="text" id="city" name="city" value={formData.city} onChange={handleChange} className="input input-bordered" />
 
-                <label htmlFor="country">Country</label>
-                <input type="text" id="country" name="country" value={formData.country} onChange={handleChange} className="input input-bordered" />
+                <label htmlFor="countries">Country</label>
+                <select id="countries" name="country" value={formData.country} className="select select-bordered">
+                    <option value="">Select a Country</option>
+                    {countries.map((country) => (
+                        <option key={country.id} value={country.name}>
+                            {country.name}
+                        </option>
+                    ))}
+                </select>
 
                 <label htmlFor="region">Region</label>
                 <select data-filter="region" className="select select-bordered" name="region" onChange={(e) => setFormData({ ...formData, region: e.target.value })}>
@@ -173,7 +166,7 @@ const FormRegisterProject = () => {
                         label: sdg.title,
                         url_image: sdg.url_image,
                     }))}
-                    onChange={handleSdgChange as any}
+                    onChange={(e) => handleSdgChange(e as { value: string; label: string; url_image: string }[])}
                     styles={{
                         control: (styles) => ({ ...styles, backgroundColor: "white" }),
                         multiValue: (styles) => ({ ...styles, backgroundColor: "#2563EB", color: "white" }),

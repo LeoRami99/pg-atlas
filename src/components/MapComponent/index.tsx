@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useState } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { Project } from '../../models/projects.models';
@@ -74,7 +74,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 tessellationStep: 2,
                 touchPitch: true,
             });
-            mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }));
+            //fix the typo of mapboxgl
+            mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }) as unknown as mapboxgl.IControl);
             mapRef.current.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true, showUserLocation: true }));
             mapRef.current.addControl(new mapboxgl.NavigationControl());
             mapRef.current.addControl(new mapboxgl.FullscreenControl());

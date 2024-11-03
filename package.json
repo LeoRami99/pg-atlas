@@ -16,6 +16,7 @@
     "@tanstack/react-query": "^5.59.16",
     "@tonconnect/ui": "^2.0.9",
     "@tonconnect/ui-react": "^2.0.9",
+    "@types/mapbox-gl": "^3.4.1",
     "axios": "^1.7.7",
     "mapbox-gl": "^3.7.0",
     "react": "^18.3.1",
