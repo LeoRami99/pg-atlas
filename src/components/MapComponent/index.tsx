@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { Project } from '../../models/projects.models';
 import useCoordinates from '../../hooks/useCoordinates';
+// const { MapboxDirections } = require('@mapbox/mapbox-gl-directions');
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css';
@@ -23,6 +24,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
         if (mapRef.current) {
             markersRef.current.forEach((marker) => marker.remove());
             markersRef.current = [];
+            console.log("Estos son los proyectos", projects);
             projects.forEach((project) => {
                 const el: HTMLDivElement = document.createElement('div');
                 el.className = 'marker';
@@ -71,15 +73,16 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 center: [userLocation.longitude, userLocation.latitude],
                 projection: 'globe',
                 zoom: 4,
-                tessellationStep: 2,
+                // tessellationStep: 2,
                 touchPitch: true,
             });
             //fix the typo of mapboxgl
+            // mapRef.current.addControl(new MapboxDirections({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }) as unknown as mapboxgl.IControl);
             mapRef.current.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl as any }) as unknown as mapboxgl.IControl);
             mapRef.current.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true, showUserLocation: true }));
             mapRef.current.addControl(new mapboxgl.NavigationControl());
             mapRef.current.addControl(new mapboxgl.FullscreenControl());
-            mapRef.current.addControl(new mapboxgl.ScaleControl());;
+
 
             const secondsPerRevolution = 240;
 

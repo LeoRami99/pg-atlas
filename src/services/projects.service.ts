@@ -13,13 +13,9 @@ export const getProjectsFilters = async (filters: Filters) => {
             return await axiosInstance.get(`/projects/filter`);
 
         }
-
-
         const response = await axiosInstance.get(`/projects/filter`, {
             params: validFilters,
         });
-        console.log(response);
-
         return response;
     } catch (error) {
         console.error(error);

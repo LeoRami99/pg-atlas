@@ -1,5 +1,5 @@
 import { SignProtocolClient, SpMode, EvmChains } from "@ethsign/sp-sdk";
-import { Project } from "../models/projects.models";
+
 
 const client = new SignProtocolClient(SpMode.OnChain, {
   chain: EvmChains.celoAlfajores,
@@ -26,7 +26,7 @@ export function ethSignService() {
     }
   };
 
-  const attestProject = async (data: Project) => {
+  const attestProject = async (data: any) => {
     try {
       const info = await client.createAttestation({
         schemaId: projectSchemaId,
