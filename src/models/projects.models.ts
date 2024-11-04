@@ -30,7 +30,6 @@ export interface Project {
 export type donationType = {
     donatorAddress: string;
     amount: number;
-    attentionId: string;
     date: string;
     txHash: string;
 }

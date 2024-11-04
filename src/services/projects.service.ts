@@ -1,7 +1,7 @@
 import axiosInstance from "./config";
 import axios from "axios";
-
 import { Filters } from "../types/filters.type";
+import { donationType } from "../models/projects.models";
 
 export const getProjectsFilters = async (filters: Filters) => {
     try {
@@ -48,4 +48,13 @@ export const sendProject = async (data: any) => {
         console.error(error);
         return [];
     }
+};
+
+
+export const sendDonationAPI = async (projectName: string, data: donationType) => {
+    const response = await axiosInstance.patch("/projects/donation", {
+        projectName,
+        donation: { ...data },
+    });
+    return response.data;
 };
