@@ -7,7 +7,7 @@ type ModalProps = ComponentProps<'dialog'> & {
 
 const Modal = ({ ...props }: ModalProps) => {
     return (
-        <dialog className={`modal backdrop-blur`} {...props}>
+        <dialog className={`modal`} {...props}>
             <div className={`modal-box`}>
                 {props.children}
             </div>
