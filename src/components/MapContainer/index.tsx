@@ -7,6 +7,7 @@ import { Filters } from '../../types/filters.type';
 
 import ProjectModal from '../ModalProject';
 import FormRegisterProject from '../FormRegisterProject';
+import "./index.css"
 
 const MapContainer = () => {
     const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -61,8 +62,9 @@ const MapContainer = () => {
                         projects={filteredProjects}
                         onSelectProject={handleSelectProject}
                     />
+
                     {selectedProject && (
-                        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+                        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} key={selectedProject.projectName} />
                     )}
                 </>
             ) : (
