@@ -4,7 +4,7 @@ Funding the Commons & Earth Commons Hackathon
 
 ### Website
 
-https://rapid-limit-5419.on.fleek.co
+https://howling-furniture-rhythmic.on-fleek.app/
 
 ### Telegram Mini app:
 
