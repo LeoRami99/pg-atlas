@@ -36,7 +36,7 @@ const MapContainer = () => {
 
     const applyFilters = async (filters: Filters) => {
         const filtered = getProjectsFilters(filters).then((response) => {
-            return response as Project[];
+            return response.data || response as Project[];
         });
         setFilteredProjects(await filtered);
     };

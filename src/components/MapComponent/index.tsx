@@ -18,6 +18,7 @@ interface MapComponentProps {
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onSelectProject }) => {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const { viewProjects, setViewProjects } = useViewProjects();
     const mapRef = useRef<mapboxgl.Map | null>(null);
     const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -30,6 +31,14 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
             markersRef.current.forEach((marker) => marker.remove());
             markersRef.current = [];
             projects.forEach((project) => {
+                // Filtrar proyectos con coordenadas inválidas
+                if (
+                    project.latitude === 0 ||
+                    project.longitude === 0
+                ) {
+                    return;
+                }
+
                 const el: HTMLDivElement = document.createElement("div");
                 el.className = "marker";
                 el.style.backgroundColor = `${project.energyCategory.color}`;
@@ -37,10 +46,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 el.style.height = "15px";
                 el.style.cursor = "pointer";
                 el.style.borderRadius = "50%";
+                el.style.border = "1px solid #333";
                 el.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
 
-                const marker = new mapboxgl.Marker(el).setLngLat([project.longitude, project.latitude]).addTo(mapRef.current as mapboxgl.Map);
+                // Crear el marcador y añadirlo al mapa
+                const marker = new mapboxgl.Marker(el)
+                    .setLngLat([project.longitude, project.latitude])
+                    .addTo(mapRef.current as mapboxgl.Map);
 
+                // Agregar evento de clic para mover el mapa y seleccionar el proyecto
                 el.addEventListener("click", (e) => {
                     e.stopPropagation();
                     if (mapRef.current) {
@@ -62,6 +76,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
 
                 markersRef.current.push(marker);
             });
+
         }
     }, [projects, onSelectProject]);
     useEffect(() => {
@@ -71,8 +86,11 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
                 container: mapContainerRef.current,
                 center: [userLocation.longitude, userLocation.latitude],
                 projection: "globe",
+                style: isMobile
+                    ? "mapbox://styles/mapbox/standard"
+                    : "mapbox://styles/mapbox/standard",
                 zoom: 4,
-                // tessellationStep: 2,
+                tessellationStep: 2,
                 touchPitch: true,
             });
             //fix the typo of mapboxgl
@@ -83,14 +101,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
             mapRef.current.addControl(new mapboxgl.FullscreenControl());
 
             const secondsPerRevolution = 240;
-
             const maxSpinZoom = 5;
-
             const slowSpinZoom = 3;
-
             let userInteracting = false;
             const spinEnabled = true;
-
             function spinGlobe() {
                 const zoom = mapRef.current?.getZoom() ?? 0;
                 if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
@@ -110,7 +124,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
 
                 // Verifica si el clic fue en un marcador
                 const features = mapRef.current.queryRenderedFeatures(e.point, {
-                    layers: [""], // Debes usar el id de la capa de tus marcadores si los has agregado a través de una fuente
+                    layers: [], // Debes usar el id de la capa de tus marcadores si los has agregado a través de una fuente
                 });
 
                 if (features.length) {
@@ -139,10 +153,12 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
             spinGlobe();
             createMarkers();
         }
-    }, [userLocation, createMarkers]);
+    }, [userLocation, createMarkers, isMobile, setCoordinates]);
 
     useEffect(() => {
         createMarkers();
+
+
     }, [projects, createMarkers]);
 
     useEffect(() => {
