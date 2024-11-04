@@ -5,11 +5,8 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    base,
+    celo,
+    celoAlfajores,
 } from 'wagmi/chains';
 import {
     QueryClientProvider,
@@ -20,7 +17,7 @@ import {
 const config = getDefaultConfig({
     appName: 'PGAtlas',
     projectId: import.meta.env.VITE_WALLET_CONNECT,
-    chains: [mainnet, polygon, optimism, arbitrum, base],
+    chains: [celo, celoAlfajores],
     ssr: true,
 });
 
