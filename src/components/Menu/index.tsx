@@ -19,7 +19,7 @@ const Menu = () => {
     };
 
     return (
-        <div className="space-y-4 md:relative md:mt-5 fixed mt-[220px] m-5 md:m-auto transition-all duration-300">
+        <div className="space-y-4 md:relative md:mt-5 fixed mt-[350px] m-5 md:m-auto transition-all duration-300">
             <Button
                 className="btn backdrop-blur bg-green-700/70 md:btn-lg border-[2px] border-green-700  hover:backdrop-blur hover:bg-green-700/70  btn-lg btn-circle text-white shadow-xl hover:btn-wide transition-all duration-300"
                 onMouseEnter={() => handleHover("buttonProjects", true)}
