@@ -1,10 +1,12 @@
 import axiosInstance from "./config";
+import axios from "axios";
 
 import { Filters } from "../types/filters.type";
 
 export const getProjectsFilters = async (filters: Filters) => {
     try {
         const validFilters = Object.entries(filters)
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             .filter(([_, value]) => value)
             .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
@@ -16,10 +18,13 @@ export const getProjectsFilters = async (filters: Filters) => {
         const response = await axiosInstance.get(`/projects/filter`, {
             params: validFilters,
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.error(error);
-        return [];
+        if (axios.isAxiosError(error)) {
+            console.error(error.response?.data);
+            throw new Error("Error al obtener los proyectos");
+        }
     }
 };
 
@@ -27,7 +32,7 @@ export const getProjectsFilters = async (filters: Filters) => {
 export const getListBlockchain = async () => {
     try {
         const response = await axiosInstance.get("/projects/blockchains");
-        return response.data;
+        return response?.data;
     } catch (error) {
         console.error(error);
         return [];
