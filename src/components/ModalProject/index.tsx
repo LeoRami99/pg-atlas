@@ -142,7 +142,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
           </div>
         </div>
-
+        {/* attestation id */}
+        <div className="flex justify-center items-center mt-6">
+          <p className="p-4 rounded text-gray-800 shadow-md">
+            Attestation ID:{" "}
+            <span className="font-semibold">{project.attestationId}</span>
+          </p>
+        </div>
         {project.blockchainImages.length > 0 && (
           <div className="mt-6">
             <h3 className="text-xl font-bold text-center">Blockchain</h3>
