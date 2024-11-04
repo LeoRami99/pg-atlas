@@ -17,7 +17,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex-none">
                     {selectedWallet ? (
-                        selectedWallet === "ton" ? <TonConnectButton /> : <ConnectButton />
+                        selectedWallet === "ton" ? <TonConnectButton /> : <ConnectButton chainStatus="icon" showBalance />
                     ) : (
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn m-1 btn-primary rounded-badge text-white">Connect Wallet</div>
