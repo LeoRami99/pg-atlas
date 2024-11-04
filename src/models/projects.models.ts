@@ -13,16 +13,17 @@ export interface Project {
     };
     subCategory: string;
     blockchain: string;
-    blockchainImages: string[];
     activityStatus: string;
+    blockchainImages: string[];
     [key: `sdgGoal${number}`]: string;
-    bfgid: string;
-    source: string;
+    bfgid: string | "N/A";
+    source: string | "N/A";
     latitude: number;
     longitude: number;
     wallet: string;
     attestationId?: string;
     donations: donationType[];
+
 }
 
 

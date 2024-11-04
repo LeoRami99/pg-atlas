@@ -38,3 +38,14 @@ export const getListBlockchain = async () => {
         return [];
     }
 };
+
+
+export const sendProject = async (data: any) => {
+    try {
+        const response = await axiosInstance.post("/projects", data);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+};
