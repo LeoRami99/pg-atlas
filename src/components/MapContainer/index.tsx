@@ -6,6 +6,7 @@ import { getProjectsFilters } from '../../services/projects.service';
 import { Filters } from '../../types/filters.type';
 
 import ProjectModal from '../ModalProject';
+import FormRegisterProject from '../FormRegisterProject';
 
 const MapContainer = () => {
     const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -19,7 +20,6 @@ const MapContainer = () => {
         category: '',
         organizationType: '',
         date: '',
-
     };
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -34,7 +34,9 @@ const MapContainer = () => {
     }, []);
 
     const applyFilters = async (filters: Filters) => {
-        const filtered = getProjectsFilters(filters).then((response) => response.data);
+        const filtered = getProjectsFilters(filters).then((response) => {
+            return response as Project[];
+        });
         setFilteredProjects(await filtered);
     };
 
@@ -48,6 +50,11 @@ const MapContainer = () => {
         <div>
             {userLocation ? (
                 <>
+                    <FormRegisterProject getProjects={
+                        () => getProjectsFilters(filters).then((response) => {
+                            setFilteredProjects(response.data as Project[]);
+                        })
+                    } />
                     <FiltersComponent applyFilters={applyFilters} />
                     <MapComponent
                         userLocation={userLocation}
