@@ -24,7 +24,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
         if (mapRef.current) {
             markersRef.current.forEach((marker) => marker.remove());
             markersRef.current = [];
-            console.log("Estos son los proyectos", projects);
             projects.forEach((project) => {
                 const el: HTMLDivElement = document.createElement('div');
                 el.className = 'marker';
