@@ -146,7 +146,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         <div className="flex justify-center items-center mt-6">
           <p className="p-4 rounded text-gray-800 shadow-md">
             Attestation ID:{" "}
-            <span className="font-semibold">{project.attestationId}</span>
+            <a className="font-semibold underline" href={`https://testnet-scan.sign.global/attestation/onchain_evm_44787_${project.attestationId}`} target="_blank" rel="noreferrer">
+              {project.attestationId}
+            </a>
           </p>
         </div>
         {project.blockchainImages.length > 0 && (
