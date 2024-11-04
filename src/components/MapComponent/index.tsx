@@ -118,7 +118,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
 
                 if (features.length) {
                     // Si hay características en el punto del clic, significa que el clic fue en un marcador.
-                    console.log('Clicked on a marker');
                     return;
                 }
 
@@ -148,7 +147,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ userLocation, projects, onS
     useEffect(() => {
         createMarkers();
     }, [projects, createMarkers]);
-
     return <div ref={mapContainerRef} style={{ width: '100%', height: '100vh' }} />;
 };
 
