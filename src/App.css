@@ -1,24 +1,19 @@
 #root {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  /* position: fixed; */
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	/* position: fixed; */
 }
 
 #map-container {
-  height: 100%;
-  width: 100%;
-
-  /* temporarily set the background color so we can tell where the map container is positioned */
-  background-color: lightgrey;
+	height: 100%;
+	width: 100%;
+	/* temporarily set the background color so we can tell where the map container is positioned */
+	background-color: lightgrey;
 }
 
-.mapboxgl-ctrl-top-right{
-    margin-top: 100px;
-}
-.mapboxgl-ctrl-top-right  input {
-   /* aplicar estilos de tailwind */
-    @apply  md:w-[full] w-[full]  bg-white border border-gray-300 rounded-lg shadow-sm py-2 px-4 block appearance-none leading-normal;
+.mapboxgl-ctrl-top-right {
+	margin-top: 100px;
 }

@@ -13,7 +13,6 @@ function App() {
       <div className="flex justify-center">
         <Navbar />
       </div>
-
       <Map />
     </main>
   )
