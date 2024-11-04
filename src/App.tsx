@@ -2,7 +2,7 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Map from './components/MapContainer'
-import FormRegisterProject from './components/FormRegisterProject'
+
 
 
 
@@ -13,7 +13,7 @@ function App() {
       <div className="flex justify-center">
         <Navbar />
       </div>
-      <FormRegisterProject />
+
       <Map />
     </main>
   )
