@@ -27,7 +27,9 @@ const MapContainer = () => {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
             });
-            getProjectsFilters(filters).then((response) => setFilteredProjects(response.data));
+            getProjectsFilters(filters).then((response) => {
+                setFilteredProjects(response.data as Project[]);
+            });
         });
     }, []);
 
